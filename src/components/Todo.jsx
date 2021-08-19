@@ -1,4 +1,7 @@
 import React from "react";
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 export default function Todo(props) {
   return (
@@ -15,12 +18,27 @@ export default function Todo(props) {
         </label>
       </div>
       <div className="btn-group">
-        <button type="button" className="btn">
+        <Button
+          type="button"
+          className="btn"
+          variant="contained"
+          color="primary"
+          startIcon={<EditIcon />}
+          size="large"
+        >
           Edit <span className="visually-hidden">{props.name}</span>
-        </button>
-        <button type="button" className="btn btn__danger" onClick={() => { props.deleteTask(props.id) }}>
+        </Button>
+        <Button
+          type="button"
+          className="btn btn__danger"
+          onClick={() => { props.deleteTask(props.id) }}
+          variant="contained"
+          color="secondary"
+          startIcon={<DeleteIcon />}
+          size="large"
+        >
           Delete <span className="visually-hidden">{props.name}</span>
-        </button>
+        </Button>
       </div>
     </li>
   );

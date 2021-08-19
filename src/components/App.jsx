@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
-import Todo from "./components/Todo";
-import Form from "./components/Form";
-import FilterButton from "./components/FilterButton";
+import Todo from "./Todo";
+import Form from "./Form";
+import FilterButton from "./FilterButton";
 
 
 function App(props) {
@@ -39,25 +39,9 @@ function App(props) {
       <h1>TodoMatic</h1>
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
-        {/* <button type="button" className="btn toggle-btn" aria-pressed="true">
-          <span className="visually-hidden">Show </span>
-          <span>all</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="false">
-          <span className="visually-hidden">Show </span>
-          <span>Active</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="false">
-          <span className="visually-hidden">Show </span>
-          <span>Completed</span>
-          <span className="visually-hidden"> tasks</span>
-        </button> */}
-        <FilterButton />
-        <FilterButton />
-        <FilterButton />
-
+        <FilterButton taskType="All" />
+        <FilterButton taskType="Active" />
+        <FilterButton taskType="Completed" />
       </div>
       <h2 id="list-heading">
         {headingText}
