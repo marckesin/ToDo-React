@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Form(props) {
-  const [name, setName] = useState('Hooks');
+  const [name, setName] = useState('');
 
   function handlehange(e) {
     setName(e.target.value);
@@ -29,6 +29,7 @@ export default function Form(props) {
         name="text"
         autoComplete="off"
         value={name}
+        placeholder="Next Task"
         onChange={handlehange}
       />
       <button type="submit" className="btn btn__primary btn__lg">

@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -37,5 +35,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "App de listas de tarefas desenvolvido em React como parte do tutorial 'Getting started with React' da MDN Web Docs",
+  "keywords": [
+    "react",
+    "jsx",
+    "css",
+    "html",
+    "MDN"
+  ]
 }

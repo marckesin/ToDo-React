@@ -4,11 +4,42 @@ import Todo from "./Todo";
 import Form from "./Form";
 import FilterButton from "./FilterButton";
 
+const FILTER_MAP = {
+  All: () => true,
+  Active: task => !task.completed,
+  Completed: task => task.completed
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
   const tasksNoun = tasks.length !== 1 ? 'tasks' : 'task';
-  const headingText = `${tasks.length} ${tasksNoun} remaining`
+  const headingText = `${tasks.length} ${tasksNoun} remaining`;
+  const [filter, setFilter] = useState('All');
+
+  const taskList = tasks
+    .filter(FILTER_MAP[filter])
+    .map(task => (
+      <Todo
+        id={task.id}
+        name={task.name}
+        completed={task.completed}
+        key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ));
+
+  const filterList = FILTER_NAMES.map(name => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
+  ));
 
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map(task => {
@@ -29,9 +60,19 @@ function App(props) {
   }
 
   function deleteTask(id) {
-    console.log(id);
-
     setTasks(tasks.filter(task => task.id !== id));
+  }
+
+  function editTask(id, newName) {
+    const editedTaskList = tasks.map(task => {
+      // if this task has the same ID as the edited task
+      if (id === task.id) {
+        //
+        return { ...task, name: newName }
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
   }
 
   return (
@@ -39,9 +80,7 @@ function App(props) {
       <h1>TodoMatic</h1>
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
-        <FilterButton taskType="All" />
-        <FilterButton taskType="Active" />
-        <FilterButton taskType="Completed" />
+        {filterList}
       </div>
       <h2 id="list-heading">
         {headingText}
@@ -51,15 +90,7 @@ function App(props) {
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading"
       >
-        {tasks.map((item) => {
-          return <Todo
-            id={item.id}
-            name={item.name}
-            completed={item.completed} key={item.id}
-            toggleTaskCompleted={toggleTaskCompleted}
-            deleteTask={deleteTask}
-          />
-        })}
+        {taskList}
       </ul>
     </div>
   );
